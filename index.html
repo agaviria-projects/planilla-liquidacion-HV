@@ -396,7 +396,139 @@
         estrato123:0,
         estrato456:0
       },
-
+      {
+        codigo:"A32U/R",
+        desc:"Instalación de percha con aislador carrete.",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"A33U/R",
+        desc:"Instalación de cable mensajero súper GX 1/4\".",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"A34U/R",
+        desc:"Colocación de cruceta metálica en poste.",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"A35U/R",
+        desc:"Colocación de conductor de puesta a tierra en cable n°4 en poste.",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"A02U/RA",
+        desc:"Conexión de acometida a la red de distribución secundaria utilizando juego de conectores o a caja portabornera o a caja subterránea.",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"A07U/RA",
+        desc:"Colocación de acometida aérea en cable de fuerza (3x4 AWG Cu).",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"CALE1F",
+        desc:"Calibración medidor 1F-2H 120/240V -10(60)A.",
+        estrato123:35599,
+        estrato456:35599
+      },
+      {
+        codigo:"200092",
+        desc:"Medidor 1F-2H 120V - 5(60)A CL 1 BASICO MCPO.",
+        estrato123:62988,
+        estrato456:83983
+      },
+      {
+        codigo:"200093",
+        desc:"Medidor 1F-3H 120/240V - 5(60)A CL 1 BASICO MCPO.",
+        estrato123:80515,
+        estrato456:107353
+      },
+      {
+        codigo:"200098",
+        desc:"Medidor 120V 5(60)A 1F 2H Cl 1 prepago/pospago bicuerpo PLC.",
+        estrato123:211196,
+        estrato456:281596
+      },
+      {
+        codigo:"200099",
+        desc:"Medidor 240V 5(60)A 1F 3H Cl 1 prepago/pospago bicuerpo PLC.",
+        estrato123:392169,
+        estrato456:392169
+      },
+      {
+        codigo:"200151A",
+        desc:"Aislador carrete porcelana 1kV.",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"200151P",
+        desc:"Aislador carrete porcelana 1kV.",
+        estrato123:0,
+        estrato456:6592
+      },
+      
+      {
+        codigo:"200315",
+        desc:"Alambre de cobre aislado nº 10 AWG.",
+        estrato123:7094,
+        estrato456:9459
+      },
+      {
+        codigo:"200316",
+        desc:"Alambre de cobre aislado nº 8 AWG.",
+        estrato123:9736,
+        estrato456:12981
+      },
+      {
+        codigo:"200367A",
+        desc:"Cable Cu 4 AWG monopolar aislado XLPE 600V.",
+        estrato123:0,
+        estrato456:0
+      },
+      {
+        codigo:"200384",
+        desc:"Cable de cobre 3x4 AWG fuerza.",
+        estrato123:76296,
+        estrato456:101728
+      },
+      {
+        codigo:"200410",
+        desc:"Cable cobre concéntrico aislado 1x8 + 1x8 AWG.",
+        estrato123:22640,
+        estrato456:30187
+      },
+      {
+        codigo:"200411",
+        desc:"Cable cobre concéntrico aislado 2x8 + 1x8 AWG.",
+        estrato123:37733,
+        estrato456:50310
+      },
+      {
+        codigo:"200492",
+        desc:"Cable AA8000 1X6AWG + 1X6AWG concéntrico aislado XLPE/XLPE 600V.",
+        estrato123:6280,
+        estrato456:8373
+      },
+      {
+        codigo:"200493",
+        desc:"Cable AL AA8000 2X6 + 1X6 AWG cilíndrico.",
+        estrato123:26522,
+        estrato456:35363
+      },
+      {
+        codigo:"200527",
+        desc:"Cable acero galvanizado 1/4pg super GX.",
+        estrato123:0,
+        estrato456:0
+      },
     ];
 
     const contenedor =
@@ -526,7 +658,7 @@
   
     items.forEach((it, index) => {
   
-      document.getElementById(`cant-${index}`).value = 0;
+      document.getElementById(`cant-${index}`).value ="";
   
       document.getElementById(`totCliente-${index}`)
         .innerText = "$ 0";
