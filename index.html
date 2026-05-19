@@ -7,6 +7,21 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 10px; background: #f7f7f7; }
     h2 { text-align: center; margin-bottom: 15px; }
+    .selector-estrato{
+
+      background:white;
+    
+      padding:12px;
+    
+      border-radius:8px;
+    
+      margin-bottom:15px;
+    
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    
+      font-weight:bold;
+    
+    }
     .card {
       background: white; padding: 12px; margin-bottom: 15px;
       border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -43,119 +58,213 @@
   </style>
 </head>
 <body>
+
   <h2>Planillas de Liquidación HV</h2>
+
+  <div class="selector-estrato">
+
+    <label>
+      <input type="radio" name="estrato" value="123" checked>
+      Estrato 1-2-3
+    </label>
+
+    <label style="margin-left:20px;">
+      <input type="radio" name="estrato" value="456">
+      Estrato 4-5-6
+    </label>
+
+  </div>
 
   <div id="contenedor-items"></div>
 
   <div class="resumen">
-    <div><span>SUMA CANTIDADES:</span> <span id="sumaCantidades">0</span></div>
-    <div><span>VALOR ACTA EPM:</span> <span id="totalCliente">$ 0</span></div>
-    <div><span>VALOR CUADRILLA:</span> <span id="totalCuadrilla">$ 0</span></div>
+
+    <div>
+      <span>SUMA CANTIDADES:</span>
+      <span id="sumaCantidades">0</span>
+    </div>
+
+    <div>
+      <span>TOTAL EPM:</span>
+      <span id="totalCliente">$ 0</span>
+    </div>
+
   </div>
 
   <script>
+
+    let tipoEstrato = "123";
+
     const items = [
-      { codigo:"A03U", desc:"Instalación acometida caja multimedidores", cliente:70290, cuadrilla:38046 },
-      { codigo:"A04R", desc:"Colocación acometida aérea Cu neutro conc.", cliente:147240, cuadrilla:91267 },
-      { codigo:"A04U", desc:"Colocación acometida aérea Cu neutro conc.", cliente:147240, cuadrilla:91267 },
-      { codigo:"A05R", desc:"Colocación acometida aérea Al neutro conc.", cliente:157300, cuadrilla:100649 },
-      { codigo:"A05U", desc:"Colocación acometida aérea Al neutro conc.", cliente:157300, cuadrilla:100649 },
-      { codigo:"A06R", desc:"Colocación acometida aérea cobre/aluminio", cliente:80719, cuadrilla:63768 },
-      { codigo:"A06U", desc:"Colocación acometida aérea simple", cliente:80719, cuadrilla:59129 },
-      { codigo:"A07R", desc:"Colocación acometida aérea cable fuerza", cliente:160799, cuadrilla:90729 },
-      { codigo:"A07RA", desc:"Colocación acometida aérea cable fuerza", cliente:160799, cuadrilla:90729 },
-      { codigo:"A07U", desc:"Colocación acometida aérea cable fuerza", cliente:160799, cuadrilla:90729 },
-      { codigo:"A07UA", desc:"Colocación acometida aérea cable fuerza", cliente:160799, cuadrilla:90729 },
-      { codigo:"A08R", desc:"Colocación acometida subterránea", cliente:73678, cuadrilla:49836 },
-      { codigo:"A08U", desc:"Colocación acometida subterránea", cliente:73678, cuadrilla:43045 },
-      { codigo:"A09R", desc:"Suministro tubería PVC canalizada", cliente:57349, cuadrilla:49093 },
-      { codigo:"A09U", desc:"Colocación tubería PVC canalizada", cliente:57349, cuadrilla:49093 },
-      { codigo:"A10R", desc:"Caja hermética fachada/poste", cliente:121630, cuadrilla:71028 },
-      { codigo:"A10U", desc:"Caja hermética fachada/poste", cliente:121630, cuadrilla:66510 },
-      { codigo:"A11R", desc:"Caja multimedidores", cliente:0, cuadrilla:100190 },
-      { codigo:"A11U", desc:"Caja multimedidores", cliente:0, cuadrilla:95150 },
-      { codigo:"A12R", desc:"Medidor energía directa", cliente:101129, cuadrilla:59689 },
-      { codigo:"A12U", desc:"Medidor energía directa", cliente:101129, cuadrilla:53106 },
-      { codigo:"A16R", desc:"Medidor bicuerpo prepago/pospago", cliente:227418, cuadrilla:106126 },
-      { codigo:"A16U", desc:"Medidor bicuerpo prepago/pospago", cliente:227418, cuadrilla:95538 },
-      { codigo:"A18R", desc:"Conductor puesta a tierra N°8", cliente:134740, cuadrilla:73142 },
-      { codigo:"A18U", desc:"Conductor puesta a tierra N°8", cliente:134740, cuadrilla:68612 },
-      { codigo:"A19R", desc:"Instalación varilla puesta a tierra", cliente:62930, cuadrilla:36840 },
-      { codigo:"A19U", desc:"Instalación varilla puesta a tierra", cliente:62930, cuadrilla:33072 },
-      { codigo:"A20R", desc:"Tubería PVC ¾”", cliente:24298, cuadrilla:16012 },
-      { codigo:"A20U", desc:"Tubería PVC ¾”", cliente:24298, cuadrilla:15144 },
-      { codigo:"A21R", desc:"Tubería TMG-IMC ¾”", cliente:49708, cuadrilla:35510 },
-      { codigo:"A21U", desc:"Tubería TMG-IMC ¾”", cliente:49708, cuadrilla:33610 },
-      { codigo:"A22R", desc:"Pase aéreo expuesto cobre/aluminio", cliente:107481, cuadrilla:84077 },
-      { codigo:"A22U", desc:"Pase aéreo expuesto cobre/aluminio", cliente:107481, cuadrilla:80092 },
-      { codigo:"A23R", desc:"Pase cable concéntrico cobre/aluminio", cliente:119418, cuadrilla:70667 },
-      { codigo:"A23U", desc:"Pase cable concéntrico cobre/aluminio", cliente:119418, cuadrilla:68150 },
-      { codigo:"A24R", desc:"Pase cable 4x8 AWG cobre", cliente:86462, cuadrilla:51427 },
-      { codigo:"A24U", desc:"Pase cable 4x8 AWG cobre", cliente:86462, cuadrilla:50380 },
-      { codigo:"A29R", desc:"Retiro acometida cobre/aluminio", cliente:31097, cuadrilla:22152 },
-      { codigo:"A29U", desc:"Retiro acometida cobre/aluminio", cliente:31097, cuadrilla:23815 },
-      { codigo:"A30R", desc:"Retiro tablero distribución", cliente:33537, cuadrilla:25070 },
-      { codigo:"A30U", desc:"Retiro tablero distribución", cliente:33537, cuadrilla:22153 },
-      { codigo:"A31R", desc:"Instalación caja derivación", cliente:0, cuadrilla:100067 },
-      { codigo:"A31U", desc:"Instalación caja derivación", cliente:0, cuadrilla:89171 },
-      { codigo:"A32R", desc:"Percha aislador carrete", cliente:0, cuadrilla:20431 },
-      { codigo:"A32U", desc:"Percha aislador carrete", cliente:0, cuadrilla:18988 },
-      { codigo:"A33R", desc:"Cable mensajero super GX 1/4”", cliente:0, cuadrilla:63654 },
-      { codigo:"A33U", desc:"Cable mensajero super GX 1/4”", cliente:0, cuadrilla:59673 },
-      { codigo:"A34R", desc:"Cruceta metálica en poste", cliente:0, cuadrilla:55930 },
-      { codigo:"A34U", desc:"Cruceta metálica en poste", cliente:0, cuadrilla:52821 },
-      { codigo:"A35R", desc:"Conductor puesta a tierra N°4", cliente:0, cuadrilla:33783 },
-      { codigo:"A35U", desc:"Conductor puesta a tierra N°4", cliente:0, cuadrilla:30952 },
-      { codigo:"CALE1F", desc:"Calibración medidor 1F", cliente:10520, cuadrilla:0 },
-      { codigo:"200092", desc:"Medidor 1F 120V CL1 básico", cliente:63853, cuadrilla:0 },
-      { codigo:"200093", desc:"Medidor 1F-3H 120/240V CL1 básico", cliente:81622, cuadrilla:0 },
-      { codigo:"200098", desc:"Medidor 120V bicuerpo PLC", cliente:214100, cuadrilla:0 },
-      { codigo:"200099", desc:"Medidor 240V bicuerpo PLC", cliente:298171, cuadrilla:0 }
-      // 👉 Aquí puedes seguir agregando más códigos si lo deseas
+
+      {
+        codigo:"A03U",
+        desc:"Instalación acometida caja multimedidores",
+
+        estrato123:70290,
+        estrato456:90500
+      },
+
+      {
+        codigo:"A04R",
+        desc:"Colocación acometida aérea Cu neutro conc.",
+
+        estrato123:147240,
+        estrato456:182000
+      },
+
+      {
+        codigo:"A04U",
+        desc:"Colocación acometida aérea Cu neutro conc.",
+
+        estrato123:147240,
+        estrato456:182000
+      },
+
+      {
+        codigo:"A05R",
+        desc:"Colocación acometida aérea Al neutro conc.",
+
+        estrato123:157300,
+        estrato456:199500
+      },
+
+      {
+        codigo:"A05U",
+        desc:"Colocación acometida aérea Al neutro conc.",
+
+        estrato123:157300,
+        estrato456:199500
+      }
+
     ];
 
-    const contenedor = document.getElementById("contenedor-items");
+    const contenedor =
+      document.getElementById("contenedor-items");
 
     items.forEach((it, index) => {
+
       const card = document.createElement("div");
+
       card.className = "card";
+
       card.innerHTML = `
-        <div class="item">${it.codigo}</div>
-        <div class="desc">${it.desc}</div>
-        <div class="valores"><div>Valor Cliente:</div><span>${formato(it.cliente)}</span></div>
-        <div class="valores"><div>Valor Cuadrilla:</div><span>${formato(it.cuadrilla)}</span></div>
-        <div class="cantidad-box">
-          <label>Cantidad:</label>
-          <input type="number" min="0" value="0" id="cant-${index}" />
+
+        <div class="item">
+          ${it.codigo}
         </div>
-        <div class="totales"><div>Total Cliente:</div><span id="totCliente-${index}">$ 0</span></div>
-        <div class="totales"><div>Total Cuadrilla:</div><span id="totCuad-${index}">$ 0</span></div>
+
+        <div class="desc">
+          ${it.desc}
+        </div>
+
+        <div class="valores">
+
+          <div>Valor EPM:</div>
+
+          <span id="precio-${index}">
+            ${formato(it.estrato123)}
+          </span>
+
+        </div>
+
+        <div class="cantidad-box">
+
+          <label>Cantidad:</label>
+
+          <input
+            type="number"
+            min="0"
+            value="0"
+            id="cant-${index}"
+          />
+
+        </div>
+
+        <div class="totales">
+
+          <div>Total:</div>
+
+          <span id="totCliente-${index}">
+            $ 0
+          </span>
+
+        </div>
+
       `;
+
       contenedor.appendChild(card);
-      document.getElementById(`cant-${index}`).addEventListener("input", actualizar);
+
+      document
+        .getElementById(`cant-${index}`)
+        .addEventListener("input", actualizar);
+
     });
 
+    document
+      .querySelectorAll('input[name="estrato"]')
+      .forEach(radio => {
+
+        radio.addEventListener("change", e => {
+
+          tipoEstrato = e.target.value;
+
+          actualizar();
+
+        });
+
+      });
+
     function formato(num) {
-      return "$ " + num.toLocaleString("es-CO");
+
+      return "$ " +
+        num.toLocaleString("es-CO");
+
     }
 
     function actualizar() {
-      let sumaCant = 0, totalCli = 0, totalCua = 0;
+
+      let sumaCant = 0;
+
+      let totalCli = 0;
+
       items.forEach((it, index) => {
-        const cant = parseInt(document.getElementById(`cant-${index}`).value) || 0;
+
+        const cant =
+          parseInt(
+            document.getElementById(`cant-${index}`).value
+          ) || 0;
+
         sumaCant += cant;
-        const tCli = cant * it.cliente;
-        const tCua = cant * it.cuadrilla;
-        totalCli += tCli;
-        totalCua += tCua;
-        document.getElementById(`totCliente-${index}`).innerText = formato(tCli);
-        document.getElementById(`totCuad-${index}`).innerText = formato(tCua);
+
+        const precio =
+          tipoEstrato === "123"
+          ? it.estrato123
+          : it.estrato456;
+
+        const total =
+          cant * precio;
+
+        totalCli += total;
+
+        document.getElementById(`precio-${index}`)
+          .innerText = formato(precio);
+
+        document.getElementById(`totCliente-${index}`)
+          .innerText = formato(total);
+
       });
-      document.getElementById("sumaCantidades").innerText = sumaCant;
-      document.getElementById("totalCliente").innerText = formato(totalCli);
-      document.getElementById("totalCuadrilla").innerText = formato(totalCua);
+
+      document.getElementById("sumaCantidades")
+        .innerText = sumaCant;
+
+      document.getElementById("totalCliente")
+        .innerText = formato(totalCli);
+
     }
+
   </script>
+
 </body>
 </html>
 
